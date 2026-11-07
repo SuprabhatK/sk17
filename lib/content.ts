@@ -1,3 +1,5 @@
+import { SHOW_PRICING } from "./flags";
+
 export type Card = {
   title: string;
   sub: string;
@@ -39,7 +41,7 @@ export const whatsappLink = (text = "") => `https://wa.me/${WHATSAPP_NUMBER}${te
 export const LINKEDIN = "https://linkedin.com/in/suprabhat-karmakar";
 export const LINKEDIN_LABEL = "linkedin.com/in/suprabhat-karmakar";
 
-export const sections: Section[] = [
+const allSections: Section[] = [
   {
     id: "intro",
     nav: "Home",
@@ -304,21 +306,25 @@ export const sections: Section[] = [
     ],
     hue: 15,
   },
-  {
-    id: "pricing",
-    nav: "Pricing",
-    eyebrow: "Transparent pricing",
-    title: "Know the cost upfront",
-    desc: "No surprises. My rate is shown openly, and your quote depends on four things: the functionality you need, how complex it is, what you can provide, and what I need to do. And the price is negotiable.",
-    points: [
-      "Fixed price or hourly, your choice, and prices are negotiable",
-      "Calibrated on real projects: two sites in about 7 hours each, a full store in 9 days",
-      "Try the interactive estimator for your own idea",
-    ],
-    links: [{ label: "Open the estimator", href: "/projects#pricing" }],
-    media: "pricing",
-    hue: 20,
-  },
+  ...(SHOW_PRICING
+    ? ([
+    {
+      id: "pricing",
+      nav: "Pricing",
+      eyebrow: "Transparent pricing",
+      title: "Know the cost upfront",
+      desc: "No surprises. My rate is shown openly, and your quote depends on four things: the functionality you need, how complex it is, what you can provide, and what I need to do. And the price is negotiable.",
+      points: [
+        "Fixed price or hourly, your choice, and prices are negotiable",
+        "Calibrated on real projects: two sites in about 7 hours each, a full store in 9 days",
+        "Try the interactive estimator for your own idea",
+      ],
+      links: [{ label: "Open the estimator", href: "/projects#pricing" }],
+      media: "pricing",
+      hue: 20,
+    },
+      ] as Section[])
+    : []),
   {
     id: "contact",
     nav: "Contact",
@@ -329,3 +335,6 @@ export const sections: Section[] = [
     hue: -45,
   },
 ];
+
+/** the sections shown on the home page (the pricing section is only included when SHOW_PRICING is on) */
+export const sections: Section[] = allSections;

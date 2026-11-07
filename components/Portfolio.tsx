@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { sections, EMAIL, PHONE, PHONE_TEL, whatsappLink, LINKEDIN, LINKEDIN_LABEL, type Section } from "@/lib/content";
 import { HOURLY_RATE, inr, plans } from "@/lib/pricing";
+import { SHOW_PRICING } from "@/lib/flags";
 import { Bolt } from "./Bolt";
 import ThemeBolt from "./ThemeBolt";
 
@@ -481,7 +482,7 @@ function Visual({ s }: { s: Section }) {
     );
   if (s.media === "frames") return <FrameCarousel cards={s.cards!} />;
   if (s.media === "services") return <Services s={s} />;
-  if (s.media === "pricing")
+  if (SHOW_PRICING && s.media === "pricing")
     return (
       <div className="vis vis-pricing">
         <div className="rate">

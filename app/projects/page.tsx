@@ -2,27 +2,32 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeBolt from "@/components/ThemeBolt";
-import Estimator from "@/components/Estimator";
 import ProjectsDial from "@/components/ProjectsDial";
 import { projects } from "@/lib/projects";
-import { HOURLY_RATE, inr, iNeedFromYou, iDoForYou } from "@/lib/pricing";
 import { PHONE, PHONE_TEL, EMAIL } from "@/lib/content";
+import { SHOW_PRICING } from "@/lib/flags";
 import "./projects.css";
 
-export const metadata: Metadata = {
-  title: "Project case studies & pricing | Suprabhat Karmakar",
-  description:
-    "Detailed case studies of AEM EDS, React and full-stack projects by Suprabhat Karmakar, with transparent pricing and an interactive estimator.",
-};
+export const metadata: Metadata = SHOW_PRICING
+  ? {
+      title: "Project case studies & pricing | Suprabhat Karmakar",
+      description: "Detailed case studies of AEM EDS, React and full-stack projects by Suprabhat Karmakar, with transparent pricing and an interactive estimator.",
+    }
+  : {
+      title: "Project case studies | Suprabhat Karmakar",
+      description: "Detailed case studies of AEM EDS, React and full-stack projects by Suprabhat Karmakar.",
+    };
 
 const shortName: Record<string, string> = { ngs: "NGS Super", tataaia: "Tata AIA", generali: "Generali Central", vaymora: "Vaymora Foods", siddhivinayak: "Siddhivinayak", starlite: "Starlite Global" };
 const dialItems = [
   { id: "top", label: "Overview" },
   ...projects.map((p) => ({ id: p.id, label: shortName[p.id] ?? p.name })),
-  { id: "pricing", label: "Pricing" },
+  ...(SHOW_PRICING ? [{ id: "pricing", label: "Pricing" }] : []),
 ];
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  // the pricing block is only loaded (and shipped) when the flag is on
+  const PricingBlock = SHOW_PRICING ? (await import("@/components/PricingBlock")).default : null;
   return (
     <div className="pg">
       <ProjectsDial items={dialItems} />
@@ -35,7 +40,7 @@ export default function ProjectsPage() {
         </div>
         <nav className="pg-nav">
           <a href="#work">Case studies</a>
-          <a href="#pricing">Pricing</a>
+          {SHOW_PRICING && <a href="#pricing">Pricing</a>}
           <Link className="pill" href="/?s=contact">
             Contact
           </Link>
@@ -49,9 +54,9 @@ export default function ProjectsPage() {
             ← Back to portfolio
           </Link>
           <p className="eyebrow">Project case studies</p>
-          <h1 className="title">What I built, how it was run, and what it costs</h1>
+          <h1 className="title">{SHOW_PRICING ? "What I built, how it was run, and what it costs" : "What I built and how it was run"}</h1>
           <p className="lead">
-            Six real projects, from a 3-year enterprise engagement to sites that went live in 7 hours. Below you will find what each one involved, how we worked with the client, who did what, and a transparent way to estimate your own project.
+            Six real projects, from a 3-year enterprise engagement to sites that went live in 7 hours. Below you will find what each one involved, how we worked with the client, who did what{SHOW_PRICING ? ", and a transparent way to estimate your own project" : ""}.
           </p>
           <div className="pg-stats">
             <div>
@@ -77,9 +82,11 @@ export default function ProjectsPage() {
                 {p.name}
               </a>
             ))}
-            <a href="#pricing" className="hl">
-              Pricing &amp; estimator
-            </a>
+            {SHOW_PRICING && (
+              <a href="#pricing" className="hl">
+                Pricing &amp; estimator
+              </a>
+            )}
           </div>
         </section>
 
@@ -186,62 +193,11 @@ export default function ProjectsPage() {
           </article>
         ))}
 
-        {/* pricing */}
-        <section id="pricing" className="pricing">
-          <p className="eyebrow">Pricing, upfront</p>
-          <h2 className="title">Know the cost before we start</h2>
-          <p className="lead">
-            My rate is <strong>{inr(HOURLY_RATE)} per hour</strong>, and <strong>prices are negotiable</strong>. You can choose a fixed price or hourly billing. The estimate below depends on four things, and the base hours are calibrated on projects I have actually delivered: two sites in about 7 hours each, a full store in 9 days, and a 3-month AEM EDS build.
-          </p>
-
-          <div className="drivers">
-            <div className="glass">
-              <b>01</b>
-              <h4>Functionality</h4>
-              <p>Every feature (forms, admin, accounts, payments, integrations) adds a known number of hours.</p>
-            </div>
-            <div className="glass">
-              <b>02</b>
-              <h4>Complexity</h4>
-              <p>Simple, standard or complex scopes change the effort, because unknowns and integrations take longer.</p>
-            </div>
-            <div className="glass">
-              <b>03</b>
-              <h4>What you provide</h4>
-              <p>Ready designs, content and fast feedback reduce hours. If I create them, they are added.</p>
-            </div>
-            <div className="glass">
-              <b>04</b>
-              <h4>What I do</h4>
-              <p>Design, build, test, deploy and hand over. You see the scope in writing before work starts.</p>
-            </div>
-          </div>
-
-          <Estimator />
-
-          <div className="split big">
-            <div className="glass">
-              <h4>What I need from you</h4>
-              <ul>
-                {iNeedFromYou.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="glass">
-              <h4>What I do for you</h4>
-              <ul>
-                {iDoForYou.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+        {PricingBlock && <PricingBlock />}
 
         <section className="pg-cta glass">
           <h2>Have a project in mind?</h2>
-          <p>Send a few details and I will reply with a scope and a fixed quote.</p>
+          <p>{SHOW_PRICING ? "Send a few details and I will reply with a scope and a fixed quote." : "Send a few details and I will reply with next steps."}</p>
           <div className="cta">
             <Link className="btn" href="/?s=contact">
               Contact me <i>→</i>
