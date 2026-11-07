@@ -1,0 +1,97 @@
+/* ===== phones and small tablets: each section scrolls normally; swipe left/right or use the buttons to change section ===== */
+.pager { display: none; }
+.pager button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border2); background: var(--card); color: var(--ink); font-size: 17px; cursor: pointer; transition: opacity .2s, background .2s, color .2s; }
+.pager button:not(:disabled):active { background: var(--purple); color: #fff; }
+.pager button:disabled { opacity: .3; }
+
+@media (max-width: 860px) {
+  :root { --R: 130vw; --gutter: calc(100vw - 46px); }
+  .stage { touch-action: pan-y; }
+
+  /* header and bottom bar are solid strips, so nothing collides with scrolling content */
+  .top { padding: 12px 20px; background: linear-gradient(var(--bg) 65%, transparent); z-index: 30; }
+  .logo { font-size: 23px; }
+  .bottom { left: 0; right: 0; bottom: 0; padding: 8px 20px calc(8px + env(safe-area-inset-bottom)); align-items: center; background: var(--card-strong); backdrop-filter: blur(14px); border-top: 1px solid var(--border); z-index: 30; }
+  .count { font-size: 22px; }
+  .count em { font-size: 12px; }
+  .pager { display: flex; gap: 10px; }
+
+  /* the dial becomes a thin decorative arc on the right edge, clear of the text */
+  .dial-anchor { left: var(--gutter); top: 50%; }
+  .marker span { right: 15px; font-size: 13px; }
+  .marker.on span { font-size: 16px; }
+  .ring3, .ticks.major, .orbit { display: none; }
+  .blob-wrap { right: -30vw; top: 64%; left: auto; width: 64vw; height: 64vw; opacity: .5; }
+  .orb.a, .orb.b { opacity: .6; }
+
+  /* each section is its own scroll area between the header and the bottom bar */
+  .content { left: 0; right: 0; top: 56px; bottom: 58px; }
+  .panel { display: block; padding: 8px 58px 28px 20px; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .panel::-webkit-scrollbar { display: none; }
+  .col-l { max-width: none; }
+  .col-r { margin-top: 22px; }
+  .eyebrow { font-size: 13px; margin-bottom: 10px; }
+  .title { font-size: clamp(28px, 8.4vw, 38px); margin-bottom: 12px; }
+  .desc { font-size: 14.5px; line-height: 1.6; max-width: none; }
+  .points { margin-top: 14px; gap: 8px; }
+  .points li { font-size: 13.5px; }
+  .cta { margin-top: 18px; gap: 10px; }
+  .btn { padding: 11px 18px; font-size: 13.5px; }
+
+  /* photo */
+  .vis-photo { height: auto; aspect-ratio: 4 / 4.7; max-width: 330px; margin: 0 auto; }
+  .chip.c1 { left: 8px; right: auto; top: 8px; }
+  .chip.c2 { display: none; }
+  .chip.c3 { left: 8px; bottom: 8px; }
+
+  /* project frames stack in a column instead of overlapping */
+  .vis-frames, .vis-frames.n1, .vis-frames.n2, .vis-frames.n3 { height: auto; display: grid; gap: 16px; }
+  .vis-frames .frame { position: static !important; width: 100% !important; transform: none !important; }
+  .frame-cap { display: flex !important; }
+
+  /* services: no hover on touch, so show the detail line */
+  .svc-grid { grid-template-columns: 1fr; gap: 10px; }
+  .svc { min-height: 0; padding: 14px; }
+  .svc p { display: block; }
+  .svc em { display: block; max-height: none; opacity: .9; transform: none; color: var(--muted); }
+  .process { display: flex; }
+
+  /* skills */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .stats-row div { padding: 10px 4px; }
+  .stats-row b { font-size: 18px; }
+  .stats-row span { font-size: 10px; }
+  .tabs { max-width: 100%; }
+  .tiles { grid-template-columns: 1fr; gap: 8px; }
+  .tile { padding: 12px 14px; }
+  .tile p { display: block; max-height: none; opacity: 1; }
+
+  /* insights */
+  .acc-b ul { display: grid; }
+  .acc-b > div { padding-left: 14px; padding-right: 14px; }
+
+  /* pricing */
+  .rate small, .plan p, .plans-note { display: block; }
+  .plan-p small, .plan-p em { display: block; }
+
+  /* form */
+  .form-card { padding: 18px; }
+  .row2 { grid-template-columns: 1fr; }
+}
+
+/* tab rows fit a phone without showing a scrollbar */
+@media (max-width: 860px) {
+  .tabs { overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { padding: 7px 11px; font-size: 12px; }
+}
+
+/* keep the same header options on phones as on desktop (name only hides on the narrowest screens) */
+@media (max-width: 860px) {
+  .navlink { display: inline-block; font-size: 13.5px; }
+  .top-right { gap: 14px; }
+  .pill { padding: 7px 16px; font-size: 13.5px; }
+}
+@media (min-width: 601px) and (max-width: 860px) {
+  .hide-sm { display: inline; }
+}

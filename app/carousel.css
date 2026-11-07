@@ -1,0 +1,14 @@
+/* ---------- tabbed carousel for project screenshots ---------- */
+.fcar { display: grid; gap: 14px; }
+.ftabs { max-width: 100%; }
+.fstage { display: grid; position: relative; touch-action: pan-y; }
+.fstage .slide { grid-area: 1 / 1; opacity: 0; transform: translateX(46px) scale(.985); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.fstage .slide.prev { transform: translateX(-46px) scale(.985); }
+.fstage .slide.on { opacity: 1; transform: none; pointer-events: auto; }
+.fstage .frame { position: relative; width: 100%; }
+.fnav { padding-top: 0; }
+
+@media (max-height: 760px) and (min-width: 861px) {
+  .fcar { gap: 10px; }
+  .fstage .frame-body { aspect-ratio: 16 / 8.4 !important; }
+}
