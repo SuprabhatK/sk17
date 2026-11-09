@@ -5,8 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
-import { sections, EMAIL, PHONE, PHONE_TEL, whatsappLink, LINKEDIN, LINKEDIN_LABEL, type Section } from "@/lib/content";
-import { hasRate, rateLabel, costOf, daysFor, plans } from "@/lib/pricing";
+import { sections, EMAIL, PHONE, PHONE_TEL, whatsappLink, LINKEDIN, LINKEDIN_LABEL, GITHUB, GITHUB_LABEL, type Section } from "@/lib/content";
+import { hasRate, rateLabel, costOf, plans } from "@/lib/pricing";
+import { LinkedInIcon, LinkedInLogo } from "./Social";
 import { SHOW_PRICING } from "@/lib/flags";
 import { Bolt } from "./Bolt";
 import ThemeBolt from "./ThemeBolt";
@@ -250,6 +251,55 @@ function Services({ s }: { s: Section }) {
           <li key={p}>{p}</li>
         ))}
       </ol>
+    </div>
+  );
+}
+
+function About({ s }: { s: Section }) {
+  const tabs = s.aboutTabs!;
+  const mobile = useMobile();
+  const [tab, setTab] = useState(0);
+  const [page, setPage] = useState(0);
+  const t = tabs[tab];
+  const per = mobile ? 2 : 3;
+  const pages = Math.ceil(t.items.length / per);
+  const cur = Math.min(page, pages - 1);
+  return (
+    <div className="vis vis-about">
+      <div className="tabs" role="tablist">
+        {tabs.map((x, i) => (
+          <button
+            key={x.name}
+            role="tab"
+            aria-selected={i === tab}
+            className={i === tab ? "on" : ""}
+            onClick={() => {
+              setTab(i);
+              setPage(0);
+            }}
+          >
+            {x.name}
+          </button>
+        ))}
+      </div>
+      <ol className={`tl${s.id === "consulting" ? " cards" : ""}`} key={`${tab}-${cur}`}>
+        {t.items.slice(cur * per, cur * per + per).map((x, i) => (
+          <li key={x.title} style={{ ["--d" as string]: `${i * 70}ms` }}>
+            {x.when && <span className="tl-when">{x.when}</span>}
+            <h4>{x.title}</h4>
+            {x.sub && <p className="tl-sub">{x.sub}</p>}
+            <p>{x.text}</p>
+            {x.tags && (
+              <div className="tags">
+                {x.tags.map((g) => (
+                  <span key={g}>{g}</span>
+                ))}
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+      <MiniPager page={cur} pages={pages} onChange={setPage} />
     </div>
   );
 }
@@ -508,9 +558,9 @@ function Visual({ s }: { s: Section }) {
                 <p>{p.blurb}</p>
               </div>
               <div className="plan-p">
-                <small>{hasRate ? "from" : "typical effort"}</small>
-                <b>{hasRate ? costOf(p.hours) : `~${p.hours} hrs`}</b>
-                <em>{hasRate ? `about ${p.hours} hrs` : `about ${daysFor(p.hours)} working days`}</em>
+                <small>{hasRate ? "from" : "best for"}</small>
+                <b>{hasRate ? costOf(p.hours) : p.bestFor}</b>
+                <em>{hasRate ? p.bestFor : "tailored to your needs"}</em>
               </div>
             </Link>
           ))}
@@ -518,6 +568,7 @@ function Visual({ s }: { s: Section }) {
         <p className="plans-note">Starting points only, and the price is negotiable. Open the estimator to add functionality, complexity and what you can provide for your own scope.</p>
       </div>
     );
+  if (s.media === "about") return <About s={s} />;
   if (s.media === "skills") return <Skills s={s} />;
   if (s.media === "insights") return <Insights s={s} />;
   return (
@@ -751,6 +802,7 @@ export default function Portfolio() {
           <Link className="navlink" href="/projects">
             Projects
           </Link>
+          <LinkedInIcon href={LINKEDIN} />
           <button className="pill" onClick={() => goTo(IDX.contact)}>
             Contact
           </button>
@@ -831,7 +883,13 @@ export default function Portfolio() {
                   </li>
                   <li>
                     <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">
+                      <LinkedInLogo className="in-ico" />
                       {LINKEDIN_LABEL}
+                    </a>
+                  </li>
+                  <li>
+                    <a href={GITHUB} target="_blank" rel="noopener noreferrer">
+                      {GITHUB_LABEL}
                     </a>
                   </li>
                   <li>Mumbai, India</li>
@@ -847,6 +905,9 @@ export default function Portfolio() {
                       <button className="btn ghost" onClick={() => goTo(IDX.contact)}>
                         Contact me
                       </button>
+                      <a className="btn ghost soc-btn" href={LINKEDIN} target="_blank" rel="noopener noreferrer">
+                        <LinkedInLogo /> LinkedIn
+                      </a>
                     </>
                   )}
                   {s.links?.map((l) => (

@@ -1,4 +1,5 @@
 import { SHOW_PRICING } from "./flags";
+import { projects } from "./projects";
 
 export type Card = {
   title: string;
@@ -12,6 +13,8 @@ export type Card = {
 
 export type Service = { title: string; text: string; get: string };
 export type SkillTab = { name: string; tiles: { name: string; benefit: string }[] };
+export type AboutItem = { when?: string; title: string; sub?: string; text: string; tags?: string[] };
+export type AboutTab = { name: string; items: AboutItem[] };
 export type Insight = { cat: "AEM EDS" | "Full-stack" | "Business"; title: string; read: string; summary: string; bullets: string[] };
 
 export type Section = {
@@ -23,7 +26,8 @@ export type Section = {
   desc: string;
   points?: string[];
   cta?: { label: string; goto: string };
-  media: "photo" | "frames" | "services" | "skills" | "insights" | "pricing" | "form";
+  media: "photo" | "about" | "frames" | "services" | "skills" | "insights" | "pricing" | "form";
+  aboutTabs?: AboutTab[];
   cards?: Card[];
   services?: Service[];
   process?: string[];
@@ -38,36 +42,172 @@ export const PHONE = "+91 96198 10168";
 export const PHONE_TEL = "+919619810168";
 export const WHATSAPP_NUMBER = PHONE_TEL.replace("+", "");
 export const whatsappLink = (text = "") => `https://wa.me/${WHATSAPP_NUMBER}${text ? "?text=" + encodeURIComponent(text) : ""}`;
-export const LINKEDIN = "https://linkedin.com/in/suprabhat-karmakar";
+export const GITHUB = "https://github.com/SuprabhatK";
+export const GITHUB_LABEL = "github.com/SuprabhatK";
+/** Add real client or colleague quotes here and a "Kind words" tab appears in the About section. Leave empty until you have them. */
+export const testimonials: { quote: string; name: string; role: string }[] = [];
+export const LINKEDIN = "https://www.linkedin.com/in/suprabhat-karmakar/";
 export const LINKEDIN_LABEL = "linkedin.com/in/suprabhat-karmakar";
 
 const allSections: Section[] = [
   {
     id: "intro",
     nav: "Home",
-    eyebrow: "Hello, I'm Suprabhat Karmakar",
+    eyebrow: "Suprabhat Karmakar · Senior Frontend Developer",
     title: "Websites & web apps that grow your business",
-    desc: "Senior Frontend & Full-Stack Developer with 5+ years of experience. I design, build and launch fast, accessible websites and e-commerce platforms, from the first idea to a live product.",
-    points: ["Website design and frontend development", "Full-stack apps: APIs, database and admin panel", "AEM EDS (Adobe Edge Delivery Services) specialist"],
+    desc: "Senior Frontend & Full-Stack Developer with 5+ years of experience. I work as a consultant and builder: I find the gap in your business, then design and build the website around it, connect the database and host it, taking you from the first idea to a live product.",
+    points: ["Consulting: I find the gap in your business, then design for it", "End to end: build, database connection and hosting", "AEM EDS (Adobe Edge Delivery Services) specialist"],
     media: "photo",
     hue: 0,
+  },
+  {
+    id: "about",
+    nav: "About",
+    eyebrow: "About me",
+    title: "Enterprise experience, hands-on craft",
+    desc: "I am a Senior Frontend Developer from Mumbai with 5+ years of experience, including 2+ years specialising in Adobe Edge Delivery Services. I build fast, accessible websites and full-stack products, and I lead a team of 4 developers through planning, code reviews and delivery.",
+    points: [
+      "Based in Mumbai, India",
+      "Enterprise work for insurance and finance brands",
+      "Focused on reusable architecture, responsive design and performance",
+      "Also a consultant: I find the gap in your business and design for it",
+    ],
+    media: "about",
+    aboutTabs: [
+      {
+        name: "Experience",
+        items: [
+          {
+            when: "Oct 2021 to now",
+            title: "Senior Frontend Developer, AEM EDS",
+            sub: "Dept Technology & Marketing Pvt Ltd / Tekno Point Multimedia India Pvt Ltd, Mumbai",
+            text: "I architect and build reusable, responsive AEM EDS blocks, including complex ones with REST and GraphQL integrations and dynamic content rendering.",
+            tags: ["AEM EDS", "JavaScript", "REST", "GraphQL"],
+          },
+          {
+            title: "Website migrations",
+            text: "I drive migrations from non-AEM platforms to AEM EDS: component-to-block mapping, migration scripts, content import, implementation and validation.",
+            tags: ["Migration scripts", "Content import", "Validation"],
+          },
+          {
+            title: "Authoring and platform setup",
+            text: "I set up the Universal Editor with a repo-less approach and manage EDS administration, including CDN settings, robots.txt and Content Security Policy headers.",
+            tags: ["Universal Editor", "CDN", "CSP"],
+          },
+          {
+            title: "Production quality",
+            text: "I lead production troubleshooting with a go-live checklist, defect resolution and quality validation across implementations.",
+            tags: ["Go-live checklist", "Debugging", "QA"],
+          },
+          {
+            title: "Frontend applications",
+            text: "I build React, Redux and JavaScript applications, and traditional AEM features with HTL/Sightly and client libraries, with API integration and performance optimisation.",
+            tags: ["React", "Redux", "HTL / Sightly"],
+          },
+        ],
+      },
+      {
+        name: "Leadership",
+        items: [
+          { title: "Technical planning", text: "I lead technical implementation and project delivery, planning the approach and breaking work into clear tasks." },
+          { title: "A team of 4 developers", text: "I coordinate a team of 4 through task allocation and delivery tracking, so everyone knows what is next." },
+          { title: "Code reviews", text: "Every change is reviewed to keep quality consistent and the codebase easy to work in." },
+          { title: "Talking to stakeholders", text: "Requirement calls, feedback sessions and bug discussions, like the two weekly calls with the NGS Super team, keep clients informed and projects on track." },
+        ],
+      },
+      {
+        name: "Clients",
+        items: projects.map((pr) => ({ title: pr.name, sub: pr.industry + " · " + pr.kind, text: pr.summary })),
+      },
+      {
+        name: "Education",
+        items: [
+          {
+            when: "2018 to 2021",
+            title: "Bachelor of Science in Computer Science",
+            sub: "Mathuradas Vissanji College of Science",
+            text: "A computer science foundation that I turned into hands-on frontend and full-stack experience from 2021 onward.",
+          },
+        ],
+      },
+      {
+        name: "Exploring",
+        items: [
+          { title: "Adobe App Builder and I/O Runtime", text: "A proof of concept with a publish-event listener that captures content publishing events, for event-driven integrations." },
+          { title: "Cloudflare Edge Workers", text: "Exploring how fund pages can be generated and rendered at the edge, to show what edge-based delivery makes possible." },
+          { title: "Full-stack with Next.js", text: "Building complete products end to end, such as the Vaymora Foods store with its storefront, admin dashboard and database." },
+        ],
+      },
+      ...(testimonials.length
+        ? [{ name: "Kind words", items: testimonials.map((t) => ({ title: t.name, sub: t.role, text: t.quote })) }]
+        : []),
+    ],
+    hue: -10,
+  },
+  {
+    id: "consulting",
+    nav: "Consulting",
+    eyebrow: "Business consulting",
+    title: "Find the gap, then design for it",
+    desc: "A website works best when it solves a real business problem. Before designing anything, I look at how your business runs, who your customers are and where opportunities are being lost. Then I design and build the site around those gaps, and share ideas to help your business grow.",
+    points: [
+      "I start with your customers, your offer and your goals",
+      "I spot the gaps: unclear message, weak trust, slow pages, no follow-up",
+      "The website is designed around those gaps, with growth ideas you can act on",
+    ],
+    cta: { label: "Talk about your business", goto: "contact" },
+    media: "about",
+    aboutTabs: [
+      {
+        name: "Find the gap",
+        items: [
+          { title: "Is your offer clear?", text: "Within a few seconds a visitor should know what you do, who it is for and why they should choose you." },
+          { title: "Is the next step obvious?", text: "Call, WhatsApp, enquiry or buy: every page should lead somewhere, without making people search." },
+          { title: "Does the site build trust?", text: "Case studies, reviews and proof of results reduce doubt, especially for services and higher-value purchases." },
+          { title: "Is it fast on a phone?", text: "Most visitors arrive on mobile. Slow or cramped pages quietly lose customers." },
+          { title: "Do you know what visitors do?", text: "Without analytics you are guessing. Tracking shows where people come from and where they leave." },
+          { title: "Can your team keep it fresh?", text: "If every change needs a developer, the site goes stale. Easy updating keeps it useful." },
+        ],
+      },
+      {
+        name: "Growth ideas",
+        items: [
+          { title: "Capture more enquiries", text: "Clear calls to action, short forms and click-to-chat on WhatsApp make it easy for interested visitors to reach you.", tags: ["Forms", "WhatsApp", "Calls to action"] },
+          { title: "Turn visitors into customers", text: "A simple journey, proof of quality and a smooth checkout or booking flow help visitors decide.", tags: ["Trust", "Speed", "Checkout"] },
+          { title: "Bring customers back", text: "Offers such as a first-order gift, membership or gifting give people a reason to return, as on the Vaymora store.", tags: ["Offers", "Membership", "Gifting"] },
+          { title: "Be found online", text: "Clean structure, good metadata and fast pages help search engines understand and rank your content.", tags: ["SEO", "Structure", "Speed"] },
+          { title: "Know what works", text: "Analytics shows which pages and campaigns bring results, so decisions come from data, not guesswork.", tags: ["Google Analytics", "Reports"] },
+          { title: "Save your team time", text: "An admin dashboard or easy authoring, plus integrations with the tools you already use, removes manual work.", tags: ["Admin", "Authoring", "Integrations"] },
+        ],
+      },
+      {
+        name: "By business",
+        items: [
+          { title: "Local and service businesses", text: "Show your services and areas clearly, make it easy to request a quote or booking, and keep contact details one tap away.", tags: ["Quote requests", "Clear services", "Mobile-first"] },
+          { title: "Online stores", text: "Make products easy to find, remove friction at checkout, and add offers and accounts that encourage repeat purchases.", tags: ["Catalogue", "Checkout", "Accounts"] },
+          { title: "Enterprise and content teams", text: "Use reusable components and easy authoring so teams publish quickly and consistently, with speed and accessibility built in.", tags: ["AEM EDS", "Authoring", "Performance"] },
+          { title: "Logistics and B2B companies", text: "Explain the service and the process clearly, show credibility, and make it simple for a business buyer to make contact.", tags: ["Credibility", "Clear process", "Enquiries"] },
+        ],
+      },
+    ],
+    hue: -25,
   },
   {
     id: "services",
     nav: "Services",
     eyebrow: "What I do for your business",
     title: "Design to launch, end to end",
-    desc: "One experienced developer for the whole journey. You share the idea; I handle design, development, deployment and support, so there are no hand-offs and nothing gets lost in translation.",
-    points: ["Clear scope, timeline and regular updates", "Mobile-first, fast and search-friendly by default", "Free hosting options to keep your running costs low"],
+    desc: "One experienced developer and consultant for the whole journey. You share the idea; I handle design, development, the database connection, hosting and support, so there are no hand-offs and nothing gets lost in translation.",
+    points: ["Clear scope, a clear plan and regular updates", "Mobile-first, fast and search-friendly by default", "Database connected and the site hosted for you, end to end"],
     cta: { label: "Start a project", goto: "contact" },
     media: "services",
     services: [
-      { title: "Website design", text: "Modern, brand-aligned layouts that look sharp on every device.", get: "UI concept · responsive layouts · design system" },
-      { title: "Frontend development", text: "Fast, accessible interfaces built with React and Next.js.", get: "Reusable components · animation · SEO basics" },
+      { title: "Business consulting", text: "I look at your business, find the gaps and plan a website that helps it grow.", get: "Gap check · growth ideas · clear next steps" },
+      { title: "Design & frontend development", text: "Modern, brand-aligned and accessible interfaces built with React and Next.js.", get: "UI concept · responsive layouts · reusable components" },
       { title: "Full-stack development", text: "APIs, databases, authentication and admin panels that work together.", get: "REST/GraphQL · databases · secure admin" },
       { title: "E-commerce, end to end", text: "Storefront, catalogue, orders and a back-office you can run yourself.", get: "Product & order management · integrations" },
       { title: "AEM EDS delivery", text: "Adobe Edge Delivery Services sites with custom blocks and easy authoring.", get: "Blocks · Universal Editor · migrations" },
-      { title: "Performance & support", text: "Lighthouse audits, accessibility checks and reliable post-launch help.", get: "Speed tuning · fixes · go-live checklist" },
+      { title: "Database, hosting & support", text: "After building, I connect your database, host the site and keep it fast, with reliable help after launch.", get: "Database setup · hosting · Lighthouse · fixes" },
     ],
     process: ["Discover", "Design", "Build", "Launch", "Support"],
     hue: -20,
@@ -161,10 +301,12 @@ const allSections: Section[] = [
         tiles: [
           { name: "REST APIs", benefit: "Reliable connections between your site and other systems." },
           { name: "GraphQL", benefit: "Fetch exactly the data a page needs, nothing extra." },
-          { name: "Database design & connectivity", benefit: "A well-structured database matched to your needs and budget, connected securely to your site." },
+          { name: "Database design & connectivity", benefit: "A well-structured database matched to your needs, connected securely to your site." },
           { name: "File & image storage", benefit: "Image and file uploads managed cleanly from your admin." },
           { name: "Admin dashboards", benefit: "Manage products, orders and content without touching code." },
           { name: "Adobe App Builder", benefit: "Event-driven integrations, such as reacting to content publishes." },
+          { name: "Hosting & deployment", benefit: "Your site is deployed and hosted, so it goes live ready for visitors." },
+          { name: "Domain setup", benefit: "Your own domain connected, so visitors reach the site on your address." },
         ],
       },
       {
@@ -176,7 +318,7 @@ const allSections: Section[] = [
           { name: "Agile / Scrum", benefit: "Visible progress in short cycles, with room to adjust." },
           { name: "Go-live checklist", benefit: "A calm, predictable launch with nothing forgotten." },
           { name: "Production support", benefit: "Quick debugging and fixes when it matters most." },
-          { name: "Google Analytics & tracking", benefit: "See how visitors find and use your site, with tracking set up properly from day one." },
+          { name: "Google Analytics & tracking", benefit: "See how visitors find and use your site, with tracking set up properly from the start." },
           { name: "SEO fundamentals", benefit: "Clean metadata and structure so search engines understand your pages." },
         ],
       },
@@ -241,7 +383,7 @@ const allSections: Section[] = [
         "cat": "Full-stack",
         "title": "Choosing the right database for your project",
         "read": "3 min read",
-        "summary": "There is no single best database. I choose one to fit your data, your traffic and your budget.",
+        "summary": "There is no single best database. I choose one to fit your data, your traffic and your needs.",
         "bullets": [
           "Relational databases (such as Postgres) suit shops and apps whose data is connected: products, customers and orders.",
           "I connect the database securely to your site and keep your options open, so you can change provider later.",
@@ -256,7 +398,7 @@ const allSections: Section[] = [
         "bullets": [
           "Staff add products, upload images and manage orders themselves, with no code involved.",
           "Access can be limited to the right people, so changes are safe.",
-          "It saves ongoing development cost, because day-to-day updates no longer need me."
+          "It saves ongoing development cost, because everyday updates no longer need me."
         ]
       },
       {
@@ -277,7 +419,7 @@ const allSections: Section[] = [
         "summary": "Hosted platforms are quickest to start. A custom store gives you control once your needs outgrow templates.",
         "bullets": [
           "Choose custom when you need your own admin, unusual workflows or integrations with existing systems.",
-          "A modern stack (Next.js, a managed database, cloud storage) can run on free tiers while you validate the idea.",
+          "A modern stack (Next.js, a managed database, cloud storage) lets you start lean and grow as the business does.",
           "Vaymora Foods is built this way: storefront, admin dashboard, database and image storage."
         ]
       },
@@ -294,13 +436,46 @@ const allSections: Section[] = [
       },
       {
         "cat": "Business",
-        "title": "Launching on a small budget",
+        "title": "What a smooth launch looks like",
         "read": "2 min read",
-        "summary": "You do not need an expensive setup to go live professionally.",
+        "summary": "A good launch is calm and predictable, because the checks were done before anyone sees the site.",
         "bullets": [
-          "Free hosting tiers are enough for many brochure sites; I choose one that fits your terms of use.",
-          "Two of my sites went live in about 7 hours each, on free hosting.",
-          "You can upgrade hosting or add a custom domain later without rebuilding anything."
+          "I run through a go-live checklist that covers performance, accessibility and redirects.",
+          "Analytics, such as Google Analytics, is set up so you can see how visitors use the site from the start.",
+          "Support continues after launch, with quick debugging and fixes if something needs attention."
+        ]
+      },
+      {
+        "cat": "Business",
+        "title": "One developer, from build to hosting",
+        "read": "2 min read",
+        "summary": "When the same person builds the site, connects the database and hosts it, nothing falls between teams.",
+        "bullets": [
+          "No hand-offs: the design, the code, the database and the hosting are set up to work together.",
+          "One point of contact if something needs attention after launch.",
+          "Fewer delays, because there is no waiting for another vendor to connect the pieces."
+        ]
+      },
+      {
+        "cat": "Business",
+        "title": "Start with the gap, not the design",
+        "read": "2 min read",
+        "summary": "A good website starts by finding what is missing in the business, not by choosing colours.",
+        "bullets": [
+          "I begin with your customers, your offer and your goals.",
+          "Then I look for gaps: an unclear message, weak proof, slow pages or no follow-up.",
+          "The design and the build are planned around closing those gaps."
+        ]
+      },
+      {
+        "cat": "Business",
+        "title": "Website ideas that help a business grow",
+        "read": "3 min read",
+        "summary": "Small, practical changes often matter more than a full redesign.",
+        "bullets": [
+          "Make the next step obvious on every page.",
+          "Show proof: case studies, reviews and results.",
+          "Track what visitors do, then improve what the data shows."
         ]
       }
     ],
@@ -310,8 +485,8 @@ const allSections: Section[] = [
     ? ([
     {
       id: "pricing",
-      nav: "Pricing",
-      eyebrow: "Transparent pricing",
+      nav: "How I work",
+      eyebrow: "How I work with you",
       title: "Know what to expect upfront",
       desc: "No surprises. Your estimate depends on four things: the functionality you need, how complex it is, what you can provide, and what I need to do. Pricing is negotiable and shared after a short call.",
       points: [

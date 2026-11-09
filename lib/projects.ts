@@ -28,7 +28,7 @@ export const projects: Project[] = [
     industry: "Superannuation (Australia)",
     kind: "AEM EDS",
     duration: "3 months",
-    durationNote: "Two client calls every week",
+    durationNote: "Regular client calls",
     role: "AEM EDS developer: blocks, authoring, navigation and API integration",
     url: "https://www.ngssuper.com.au/",
     image: "/projects/ngs.webp",
@@ -38,9 +38,9 @@ export const projects: Project[] = [
       "NGS Super needed a fast, accessible website that its own team could update without developers. AEM EDS was the platform: lightweight pages, easy authoring, and a header that stays in step with the site as pages change.",
     facts: [
       { n: "3 months", label: "start to live" },
-      { n: "2 calls", label: "with the client every week" },
+      { n: "AEM EDS", label: "blocks and authoring setup" },
       { n: "Dynamic", label: "navigation that updates itself" },
-      { n: "Client", label: "supplied the APIs" },
+      { n: "REST", label: "API integrations in blocks" },
     ],
     delivered: [
       {
@@ -57,7 +57,7 @@ export const projects: Project[] = [
       },
       {
         title: "Platform setup and go-live",
-        text: "EDS configuration, performance and accessibility checks, and a go-live checklist, so launch day was calm and predictable.",
+        text: "EDS configuration, performance and accessibility checks, and a go-live checklist, so the launch was calm and predictable.",
       },
       {
         title: "Google Analytics",
@@ -68,7 +68,7 @@ export const projects: Project[] = [
       { title: "Call 1: requirement gathering", text: "Every week we walked through the next set of pages and components, confirmed content and API needs, and agreed priorities." },
       { title: "Build between calls", text: "I built the blocks and pages, tested them, and shared a preview link so the client could see real progress, not slides." },
       { title: "Call 2: feedback and bugs", text: "Later the same week we reviewed the preview together, logged feedback and bugs, and agreed exactly what would be fixed next." },
-      { title: "Repeat, then launch", text: "Twelve weeks of this loop kept surprises small. At the end the site went live." },
+      { title: "Repeat, then launch", text: "Repeating this loop through the project kept surprises small. At the end the site went live." },
     ],
     clientProvided: ["The backend APIs and access to them", "Requirements and priorities in the weekly call", "Prompt feedback on each preview"],
     iDid: ["Block architecture and authoring model", "Dynamic header navigation", "API integration with error handling", "Responsive build, QA and performance tuning", "Go-live and support", "Google Analytics setup"],
@@ -210,7 +210,7 @@ export const projects: Project[] = [
       },
       {
         title: "Admin dashboard",
-        text: "A private back-office for the team to manage products, images and orders without touching code, so day-to-day changes never need a developer.",
+        text: "A private back-office for the team to manage products, images and orders without touching code, so everyday changes never need a developer.",
       },
       {
         title: "Database and image storage",
@@ -244,20 +244,20 @@ export const projects: Project[] = [
     role: "Frontend developer: design, build and deploy",
     url: "https://siddhivinayak-water-transport.vercel.app/",
     image: "/projects/siddhivinayak.webp",
-    stack: ["Next.js", "React", "CSS", "Vercel (free hosting)"],
+    stack: ["Next.js", "React", "CSS", "Vercel"],
     summary: "A clear, trust-building website for a 24x7 water supply business, designed, built and live in about 7 hours.",
     brief:
       "A local service business needed a professional online presence that explains its services and makes it easy to request a delivery. The goal: live fast, look credible, work on every phone.",
     facts: [
       { n: "~7 hrs", label: "to build and go live" },
       { n: "Responsive", label: "works on every device" },
-      { n: "Free", label: "hosting, no running cost" },
+      { n: "Live", label: "deployed and publicly available" },
       { n: "Clear CTAs", label: "request supply, view services" },
     ],
     delivered: [
       { title: "Focused page structure", text: "A strong hero with the offer and two clear actions, followed by services, areas served and contact, so a visitor understands the business in seconds." },
       { title: "Responsive, fast and simple", text: "Mobile-first layout with lightweight assets, so it loads quickly on phones and mid-range connections." },
-      { title: "Deployed live", text: "Published on free hosting with no monthly fees, ready to connect to a custom domain whenever the business wants." },
+      { title: "Deployed live", text: "Deployed live and ready to connect to a custom domain whenever the business wants." },
     ],
     process: [
       { title: "Brief to structure", text: "Agree the services, areas and main call to action." },
@@ -277,7 +277,7 @@ export const projects: Project[] = [
     role: "Frontend developer: design, build and deploy",
     url: "https://starliteglobal-id7j-git-master-suprabhatk17s-projects.vercel.app/",
     image: "/projects/starlite.webp",
-    stack: ["Next.js", "React", "CSS", "Vercel (free hosting)"],
+    stack: ["Next.js", "React", "CSS", "Vercel"],
     summary: "A corporate website for an international logistics company, designed, built and live in about 7 hours.",
     brief:
       "A shipping company needed a clean corporate site that communicates reliability: what it does, how it works and how to get in touch, with a design that feels established.",
@@ -285,12 +285,12 @@ export const projects: Project[] = [
       { n: "~7 hrs", label: "to build and go live" },
       { n: "5 sections", label: "home, about, services, core business, contact" },
       { n: "Responsive", label: "works on every device" },
-      { n: "Free", label: "hosting, no running cost" },
+      { n: "Live", label: "deployed and publicly available" },
     ],
     delivered: [
       { title: "Corporate site structure", text: "Home, About, Services, Core Business and Contact, with a clear headline and call to action up front." },
       { title: "Brand-led visual design", text: "Imagery, colour and typography that match the company's logo and industry." },
-      { title: "Deployed live", text: "Published on free hosting, with a custom domain easy to add later." },
+      { title: "Deployed live", text: "Deployed live, with a custom domain easy to add later." },
     ],
     process: [
       { title: "Brief to structure", text: "Agree sections, tone and the main action." },

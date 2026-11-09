@@ -1,0 +1,21 @@
+/* ---------- About: tabs + timeline cards ---------- */
+.vis-about { display: grid; gap: 14px; }
+.tl { list-style: none; margin: 0; padding: 0 0 0 24px; position: relative; display: grid; gap: 12px; }
+.tl::before { content: ""; position: absolute; left: 7px; top: 14px; bottom: 14px; width: 1px; background: var(--border2); }
+.tl li { position: relative; padding: 16px 18px; border-radius: 16px; background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(8px); animation: tileIn .5s both cubic-bezier(.2,.8,.2,1); animation-delay: var(--d); transition: transform .3s, border-color .3s, box-shadow .3s; }
+.tl li::before { content: ""; position: absolute; left: -24px; top: 22px; width: 13px; height: 13px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--teal)); box-shadow: 0 0 0 4px var(--tagbg); }
+.tl li:hover { transform: translateX(4px); border-color: var(--hl-border); box-shadow: 0 18px 32px -24px rgba(75,42,134,.5); }
+.tl-when { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+.tl h4 { font-size: 15px; font-weight: 600; margin-top: 3px; }
+.tl-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.tl li p:not(.tl-sub) { font-size: 13px; line-height: 1.55; color: var(--body2); margin-top: 6px; }
+@media (max-width: 860px) {
+  .tl { padding-left: 20px; }
+  .tl li { padding: 13px 14px; }
+  .tl li::before { left: -20px; }
+}
+
+/* consulting tabs: plain cards instead of a timeline */
+.tl.cards { padding-left: 0; }
+.tl.cards::before, .tl.cards li::before { display: none; }
+.tl.cards li h4 { margin-top: 0; }

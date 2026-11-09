@@ -6,6 +6,8 @@ import "./dial.css";
 import "./insights.css";
 import "./mobile.css";
 import "./carousel.css";
+import "./about.css";
+import "./social.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });

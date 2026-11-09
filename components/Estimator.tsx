@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  PRODUCTIVE_HOURS_PER_DAY,
   ESTIMATE_LOW,
   ESTIMATE_HIGH,
+  standardIncluded,
   hasRate,
   rateLabel,
   costRange,
@@ -36,11 +36,14 @@ export default function Estimator() {
       hours,
       lo: hours * ESTIMATE_LOW,
       hi: hours * ESTIMATE_HIGH,
-      days: Math.ceil(hours / PRODUCTIVE_HOURS_PER_DAY),
     };
   }, [type, picked, cx, prov]);
 
   const t = projectTypes.find((p) => p.id === type)!;
+  const selected = features.filter((f) => picked[f.id]).length;
+  const cxName = complexities.find((c) => c.id === cx)!.name;
+  const included = [...standardIncluded, ...features.filter((f) => picked[f.id]).map((f) => f.name)];
+  const shown = included.slice(0, 8);
 
   return (
     <div className="est">
@@ -53,7 +56,7 @@ export default function Estimator() {
             {projectTypes.map((p) => (
               <button key={p.id} className={type === p.id ? "on" : ""} onClick={() => setType(p.id)}>
                 <strong>{p.name}</strong>
-                <span>{p.hours} hrs base</span>
+                <span>Best for {p.bestFor.toLowerCase()}</span>
               </button>
             ))}
           </div>
@@ -75,7 +78,6 @@ export default function Estimator() {
                   <strong>{f.name}</strong>
                   <small>{f.note}</small>
                 </span>
-                <span className="hrs">+{f.hours}h</span>
               </label>
             ))}
           </div>
@@ -118,7 +120,7 @@ export default function Estimator() {
       </div>
 
       <aside className="est-result">
-        <p className="est-eyebrow">Your estimate</p>
+        <p className="est-eyebrow">{hasRate ? "Your estimate" : "Your project"}</p>
         <div className="est-price">
           {hasRate ? (
             billing === "fixed" ? (
@@ -129,17 +131,15 @@ export default function Estimator() {
               </>
             )
           ) : (
-            <>
-              {Math.round(calc.lo)} to {Math.round(calc.hi)} <i>hours</i>
-            </>
+            <>{t.name}</>
           )}
         </div>
         <p className="est-sub">
           {hasRate
             ? billing === "fixed"
               ? "Fixed price, agreed in writing before I start."
-              : `About ${Math.round(calc.lo)} to ${Math.round(calc.hi)} hours, billed weekly from a timesheet.`
-            : "Typical effort for this scope. Pricing is shared after a short call, and it is negotiable."}
+              : "Billed weekly from a timesheet, with regular updates."
+            : "Here is what your project includes. Pricing is shared after a short call, and it is negotiable."}
         </p>
 
         {hasRate && (
@@ -155,29 +155,33 @@ export default function Estimator() {
 
         <ul className="est-lines">
           <li>
-            <span>Base: {t.name}</span>
-            <b>{calc.base}h</b>
+            <span>Project type</span>
+            <b>{t.name}</b>
           </li>
           <li>
             <span>Functionality</span>
-            <b>+{calc.extra}h</b>
+            <b>{selected === 0 ? "None added" : `${selected} selected`}</b>
           </li>
           <li>
             <span>Complexity</span>
-            <b>×{calc.mult}</b>
+            <b>{cxName}</b>
           </li>
           <li>
-            <span>Your inputs</span>
-            <b>{calc.pct > 0 ? `+${Math.round(calc.pct * 100)}%` : "none"}</b>
+            <span>What you provide</span>
+            <b>{calc.pct > 0 ? "I help with some" : "All ready"}</b>
           </li>
           <li className="sum">
-            <span>Estimated effort</span>
-            <b>{Math.round(calc.hours)}h</b>
+            <span>Next step</span>
+            <b>A short call to confirm</b>
           </li>
-          <li>
-            <span>Delivery time</span>
-            <b>~{calc.days} working days</b>
-          </li>
+        </ul>
+
+        <p className="est-incl-h">Included in your project</p>
+        <ul className="est-incl">
+          {shown.map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+          {included.length > shown.length && <li className="more">and {included.length - shown.length} more</li>}
         </ul>
 
         <Link className="btn" href="/?s=contact">
@@ -185,7 +189,7 @@ export default function Estimator() {
         </Link>
         <p className="est-fine">
           This is an estimate to help you plan, and the price is negotiable. After a short call I confirm the scope and send a final quote.
-          {hasRate && <> The rate is {rateLabel()}/hour.</>} The range allows for {Math.round((1 - ESTIMATE_LOW) * 100)}% under to {Math.round((ESTIMATE_HIGH - 1) * 100)}% over.
+          {hasRate && <> The rate is {rateLabel()}/hour.</>} The final quote depends on the confirmed scope.
         </p>
       </aside>
     </div>

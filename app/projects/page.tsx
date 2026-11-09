@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeBolt from "@/components/ThemeBolt";
+import { LinkedInIcon, LinkedInLogo } from "@/components/Social";
 import ProjectsDial from "@/components/ProjectsDial";
 import { projects } from "@/lib/projects";
-import { PHONE, PHONE_TEL, EMAIL } from "@/lib/content";
+import { PHONE, PHONE_TEL, EMAIL, LINKEDIN } from "@/lib/content";
 import { SHOW_PRICING } from "@/lib/flags";
 import "./projects.css";
 
 export const metadata: Metadata = SHOW_PRICING
   ? {
-      title: "Project case studies & pricing | Suprabhat Karmakar",
-      description: "Detailed case studies of AEM EDS, React and full-stack projects by Suprabhat Karmakar, with transparent pricing and an interactive estimator.",
+      title: "Project case studies & how I work | Suprabhat Karmakar",
+      description: "Detailed case studies of AEM EDS, React and full-stack projects by Suprabhat Karmakar, with a clear view of how I work with clients and an interactive project estimator.",
     }
   : {
       title: "Project case studies | Suprabhat Karmakar",
@@ -22,7 +23,7 @@ const shortName: Record<string, string> = { ngs: "NGS Super", tataaia: "Tata AIA
 const dialItems = [
   { id: "top", label: "Overview" },
   ...projects.map((p) => ({ id: p.id, label: shortName[p.id] ?? p.name })),
-  ...(SHOW_PRICING ? [{ id: "pricing", label: "Pricing" }] : []),
+  ...(SHOW_PRICING ? [{ id: "pricing", label: "How I work" }] : []),
 ];
 
 export default async function ProjectsPage() {
@@ -40,7 +41,8 @@ export default async function ProjectsPage() {
         </div>
         <nav className="pg-nav">
           <a href="#work">Case studies</a>
-          {SHOW_PRICING && <a href="#pricing">Pricing</a>}
+          {SHOW_PRICING && <a href="#pricing">How I work</a>}
+          <LinkedInIcon href={LINKEDIN} />
           <Link className="pill" href="/?s=contact">
             Contact
           </Link>
@@ -54,7 +56,7 @@ export default async function ProjectsPage() {
             ← Back to portfolio
           </Link>
           <p className="eyebrow">Project case studies</p>
-          <h1 className="title">{SHOW_PRICING ? "What I built, how it was run, and what it costs" : "What I built and how it was run"}</h1>
+          <h1 className="title">{SHOW_PRICING ? "What I built, how it was run, and how I work with you" : "What I built and how it was run"}</h1>
           <p className="lead">
             Six real projects, from a 3-year enterprise engagement to sites that went live in 7 hours. Below you will find what each one involved, how we worked with the client, who did what{SHOW_PRICING ? ", and a transparent way to estimate your own project" : ""}.
           </p>
@@ -84,7 +86,7 @@ export default async function ProjectsPage() {
             ))}
             {SHOW_PRICING && (
               <a href="#pricing" className="hl">
-                Pricing &amp; estimator
+                How I work &amp; estimator
               </a>
             )}
           </div>
@@ -207,6 +209,9 @@ export default async function ProjectsPage() {
             </a>
             <a className="btn ghost" href={`mailto:${EMAIL}`}>
               Email
+            </a>
+            <a className="btn ghost soc-btn" href={LINKEDIN} target="_blank" rel="noopener noreferrer">
+              <LinkedInLogo /> LinkedIn
             </a>
           </div>
         </section>

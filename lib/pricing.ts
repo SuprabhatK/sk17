@@ -1,13 +1,13 @@
 /**
  * PRICING CONFIG
  *
- * Amounts in rupees are HIDDEN while HOURLY_RATE is null: the site then shows effort (hours) and delivery
- * time only, and says that the price is negotiable and shared after a short call.
+ * Amounts in rupees are HIDDEN while HOURLY_RATE is null: the site then shows a project size (Small, Medium,
+ * Large, Enterprise) only, and says that the price is negotiable and shared after a short call.
+ * Hours are used internally to size a project and are never displayed.
  * To show amounts, set HOURLY_RATE to your real rate (INR per hour), for example 1200, and push.
  * The hours below are estimates based on real projects. Adjust them if they do not match your experience.
  */
 export const HOURLY_RATE: number | null = null;
-export const PRODUCTIVE_HOURS_PER_DAY = 6; // used to turn hours into a delivery timeline
 export const ESTIMATE_LOW = 0.9; // low end of the range = estimate x 0.9
 export const ESTIMATE_HIGH = 1.15; // high end of the range = estimate x 1.15
 
@@ -20,33 +20,36 @@ export const rateLabel = (): string | null => (HOURLY_RATE === null ? null : inr
 export const costOf = (hours: number): string | null => (HOURLY_RATE === null ? null : inr(hours * HOURLY_RATE));
 export const costRange = (lo: number, hi: number): string | null =>
   HOURLY_RATE === null ? null : inr(roundTo(lo * HOURLY_RATE, 500)) + " to " + inr(roundTo(hi * HOURLY_RATE, 500));
-export const daysFor = (hours: number) => Math.ceil(hours / PRODUCTIVE_HOURS_PER_DAY);
 
-export type ProjectType = { id: string; name: string; hours: number; note: string; ref: string };
+export type ProjectType = { id: string; bestFor: string; name: string; hours: number; note: string; ref: string };
 export const projectTypes: ProjectType[] = [
   {
     id: "landing",
+    bestFor: "Small businesses",
     name: "Landing / brochure site",
     hours: 8,
-    note: "1 to 5 pages, responsive, live on free hosting.",
-    ref: "Reference: Siddhivinayak and Starlite, about 7 hours each.",
+    note: "1 to 5 pages, responsive and fast.",
+    ref: "Reference: Siddhivinayak and Starlite, quick brochure-style builds.",
   },
   {
     id: "business",
+    bestFor: "Growing companies",
     name: "Business website",
     hours: 30,
     note: "Up to about 10 pages, contact form, SEO basics and smooth interactions.",
-    ref: "Built on the same approach as the 7-hour sites, with more pages and polish.",
+    ref: "Built on the same approach as the quick-build sites, with more pages and polish.",
   },
   {
     id: "store",
+    bestFor: "Online sellers",
     name: "Full-stack e-commerce store",
     hours: 72,
     note: "Storefront, accounts, admin dashboard, database and image storage.",
-    ref: "Reference: Vaymora Foods, delivered in 9 days.",
+    ref: "Reference: Vaymora Foods, built end to end.",
   },
   {
     id: "webapp",
+    bestFor: "Teams needing tools",
     name: "Custom web app / dashboard",
     hours: 60,
     note: "Authenticated app with forms, data tables and API integration.",
@@ -54,10 +57,11 @@ export const projectTypes: ProjectType[] = [
   },
   {
     id: "eds",
+    bestFor: "Enterprise teams",
     name: "AEM EDS website",
     hours: 120,
     note: "Block library, authoring model, dynamic navigation and go-live.",
-    ref: "Reference: NGS Super, 3 months with two client calls every week.",
+    ref: "Reference: NGS Super, a 3-month build with two client calls every week.",
   },
 ];
 
@@ -76,7 +80,7 @@ export const features: Feature[] = [
   { id: "nav", name: "Dynamic navigation (AEM EDS)", hours: 12, note: "Header and menu update automatically as pages change." },
   { id: "migrate", name: "Migrate an existing site (per 10 pages)", hours: 12, note: "Content mapping, import scripts and validation." },
   { id: "i18n", name: "Multi-language support", hours: 14, note: "Language switcher and translated content structure." },
-  { id: "host", name: "Hosting, domain and go-live setup", hours: 2, note: "Deployment on free or paid hosting and DNS setup." },
+  { id: "host", name: "Go-live and domain setup", hours: 2, note: "Deployment, domain connection and final checks." },
 ];
 
 export type Complexity = { id: string; name: string; mult: number; note: string };
@@ -110,7 +114,7 @@ export const provided: Provided[] = [
     id: "feedback",
     title: "Feedback speed",
     choices: [
-      { id: "fast", label: "Within 48 hours, one decision-maker", pct: 0 },
+      { id: "fast", label: "Quick replies, one decision-maker", pct: 0 },
       { id: "slow", label: "Slower, several stakeholders", pct: 0.1 },
     ],
   },
@@ -124,16 +128,25 @@ export const iNeedFromYou = [
 ];
 export const iDoForYou = [
   "Plan the scope and timeline, and confirm them before I start",
-  "Design (if needed), build, test and deploy",
+  "Design (if needed), build, test, connect the database and host the site",
   "Make it responsive, accessible and fast, checked with Lighthouse",
   "Share previews regularly and fix the feedback you give",
   "Hand over clearly, with the go-live checklist done",
 ];
 
-export type Plan = { name: string; hours: number; blurb: string };
+export type Plan = { name: string; bestFor: string; hours: number; blurb: string };
 export const plans: Plan[] = [
-  { name: "Landing / brochure site", hours: projectTypes[0].hours, blurb: "Up to 5 pages, live on free hosting." },
-  { name: "Business website", hours: projectTypes[1].hours, blurb: "About 10 pages, forms, SEO and animation." },
-  { name: "Full-stack online store", hours: projectTypes[2].hours, blurb: "Storefront, admin, database and images." },
-  { name: "AEM EDS website", hours: projectTypes[4].hours, blurb: "Blocks, authoring and dynamic navigation." },
+  { name: "Landing / brochure site", bestFor: "Small businesses", hours: projectTypes[0].hours, blurb: "Up to 5 pages, responsive, fast and hosted." },
+  { name: "Business website", bestFor: "Growing companies", hours: projectTypes[1].hours, blurb: "About 10 pages, forms, SEO and animation." },
+  { name: "Full-stack online store", bestFor: "Online sellers", hours: projectTypes[2].hours, blurb: "Storefront, admin, database and images." },
+  { name: "AEM EDS website", bestFor: "Enterprise teams", hours: projectTypes[4].hours, blurb: "Blocks, authoring and dynamic navigation." },
+];
+
+/** What every project includes, shown in the estimator next to the features a visitor picks. */
+export const standardIncluded = [
+  "Responsive, mobile-first build",
+  "Accessibility and Lighthouse checks",
+  "Testing across devices",
+  "Database connection and hosting setup",
+  "Go-live checklist",
 ];

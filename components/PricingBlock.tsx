@@ -7,25 +7,41 @@ const promises = [
   { t: "Updates you can actually see", d: "Preview links and regular check-ins, the same rhythm that worked on NGS Super, with two client calls every week." },
   { t: "Changes handled openly", d: "If requirements change, I explain the effect on time and cost first, and go ahead only when you agree." },
   { t: "Fast and performance-minded", d: "Pages are checked with Lighthouse and for accessibility before launch. Two brochure sites went live in about 7 hours each." },
-  { t: "A clean handover", d: "A deployed, tested site and a go-live checklist, with code organised so your team or another developer can carry on." },
-  { t: "Honest advice", d: "If a simpler or cheaper option fits your goal better, I will tell you, even if it means a smaller project." },
+  { t: "A clean handover", d: "A tested site with the database connected and hosting set up, plus a go-live checklist, with code organised so your team or another developer can carry on." },
+  { t: "Business-first advice", d: "I look for the real gap in your business first. If a simpler option fits your goal better, I will tell you, even if it means a smaller project." },
+];
+
+const steps = [
+  { t: "Discovery call", d: "We talk through your goals, your customers and where the business is losing opportunities, so the website is designed around real gaps." },
+  { t: "Scope in writing", d: "I confirm what will be built, what you provide and what I do, and send a written estimate for your approval." },
+  { t: "Build with previews", d: "I build in stages and share preview links, with regular check-ins for feedback and bug discussions." },
+  { t: "Database, hosting and launch", d: "I connect the database, host the site, and test across devices with performance, accessibility and go-live checks before it goes live." },
+  { t: "Support after launch", d: "Once the site is live I can fix issues and handle updates, so it keeps running well." },
 ];
 
 const trust = [
   { n: "5+", l: "years of experience" },
   { n: "6", l: "live projects" },
   { n: "3 yrs", l: "on one enterprise engagement" },
-  { n: "~7 hrs", l: "to launch a brochure site" },
+  { n: "100+", l: "API calls integrated" },
 ];
 
 const faq: FaqItem[] = [
   {
     q: "How do you estimate a project?",
-    a: "I look at four things: the functionality you need, how complex it is, what you can provide (designs, content, quick feedback) and what I need to do. The hours are based on projects I have actually delivered. After a short call I confirm the scope and send a final quote.",
+    a: "I look at four things: the functionality you need, how complex it is, what you can provide (designs, content, quick feedback) and what I need to do. The estimate is based on projects I have actually delivered. After a short call I confirm the scope and send a final quote.",
   },
   {
     q: "Fixed price or hourly?",
     a: "Either. A fixed price suits a clear scope, and hourly billing suits work that will keep evolving. Prices are negotiable, and we agree the approach before I start.",
+  },
+  {
+    q: "Can you advise on how my website can help my business grow?",
+    a: "Yes. I work as a consultant as well as a developer: I look at how your business runs, where customers get stuck or drop off, and what is missing, then plan the website and next steps around that. I share ideas based on experience, and we decide together what is worth doing.",
+  },
+  {
+    q: "Do you handle the database and hosting too?",
+    a: "Yes. I work end to end: after building, I connect the database and host the site, so it goes live ready to use. Tell me what your project needs and I will set up what suits it.",
   },
   {
     q: "What if my requirements change?",
@@ -34,6 +50,14 @@ const faq: FaqItem[] = [
   {
     q: "What do I need to provide to get started?",
     a: "A short brief or a call is enough. Designs and content are helpful, or I can create them. If anything needs connecting, such as an API, I will need access and documentation. One person who can approve work quickly makes everything faster.",
+  },
+  {
+    q: "Can my team update the content ourselves?",
+    a: "Yes, that is a main goal. With AEM EDS I build reusable blocks and set up authoring with the Universal Editor, and for online stores I build an admin dashboard, so routine updates do not need a developer.",
+  },
+  {
+    q: "Do you work with remote or international clients?",
+    a: "Yes. For example, I delivered the NGS Super website for an Australian client, with two calls every week and preview links in between.",
   },
   {
     q: "Can you work with my existing site or team?",
@@ -45,7 +69,7 @@ const faq: FaqItem[] = [
   },
   {
     q: "How long does a project take?",
-    a: "It depends on scope. A brochure website took about 7 hours of work, a full online store took 9 days, and a large AEM EDS build took a few months with weekly client calls. The estimator above gives a typical effort for your scope.",
+    a: "It depends on scope. A brochure website took about 7 hours of work, a full online store took 9 days, and a large AEM EDS build took a few months with weekly client calls. After a short call I give you a clear plan for your scope.",
   },
 ];
 
@@ -55,7 +79,7 @@ export default function PricingBlock() {
     <>
       {/* pricing */}
       <section id="pricing" className="pricing">
-        <p className="eyebrow">Pricing &amp; estimates</p>
+        <p className="eyebrow">How I work</p>
         <h2 className="title">Know what to expect before we start</h2>
         <p className="lead">
           {hasRate ? (
@@ -67,7 +91,7 @@ export default function PricingBlock() {
               <strong>Prices are negotiable</strong> and shared after a short call about your project.
             </>
           )}{" "}
-          You can choose a fixed price or hourly billing. The estimate below depends on four things, and the hours are calibrated on projects I have actually delivered: two sites in about 7 hours each, a full store in 9 days, and a 3-month AEM EDS build.
+          You can choose a fixed price or hourly billing. The estimate below depends on four things, and it is calibrated on projects I have actually delivered: two sites in about 7 hours each, a full store in 9 days, and a 3-month AEM EDS build.
         </p>
 
         <div className="trust">
@@ -122,6 +146,17 @@ export default function PricingBlock() {
             </ul>
           </div>
         </div>
+
+        <h3 className="sub-h">How a project runs</h3>
+        <ol className="flow">
+          {steps.map((x, i) => (
+            <li key={x.t}>
+              <b>{String(i + 1).padStart(2, "0")}</b>
+              <h4>{x.t}</h4>
+              <p>{x.d}</p>
+            </li>
+          ))}
+        </ol>
 
         <h3 className="sub-h">My promises to you</h3>
         <div className="promises">

@@ -1,0 +1,18 @@
+/* ---------- LinkedIn logo links ---------- */
+.soc { width: 36px; height: 36px; border-radius: 50%; display: inline-grid; place-items: center; color: #0a66c2; border: 1px solid var(--border2); background: var(--card); transition: transform .25s, background .25s, color .25s, border-color .25s; }
+.soc svg { width: 17px; height: 17px; }
+.soc:hover { background: #0a66c2; color: #fff; border-color: #0a66c2; transform: translateY(-2px); }
+:root[data-theme="dark"] .soc { color: #70b5f9; }
+:root[data-theme="dark"] .soc:hover { background: #0a66c2; color: #fff; }
+
+.btn.soc-btn svg { width: 16px; height: 16px; color: #0a66c2; }
+:root[data-theme="dark"] .btn.soc-btn svg { color: #70b5f9; }
+.btn.soc-btn:hover svg { color: inherit; }
+
+.in-ico { display: inline-block; width: 15px; height: 15px; margin-right: 6px; vertical-align: -2px; color: #0a66c2; }
+:root[data-theme="dark"] .in-ico { color: #70b5f9; }
+
+.top-right, .pg-nav { align-items: center; }
+@media (max-width: 860px) {
+  .soc { width: 34px; height: 34px; }
+}
