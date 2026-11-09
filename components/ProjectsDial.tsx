@@ -125,13 +125,8 @@ export default function ProjectsDial({ items }: { items: DialItem[] }) {
       </div>
 
       <nav className="pdial" aria-label="Jump to a section">
-        <div className="orbit" />
-        <div className="lens" />
         <div className="dial" ref={dialRef}>
           <div className="ring" />
-          <div className="ticks" />
-          <div className="ticks major" />
-          <div className="ring3" />
           {items.map((it, i) => (
             <button
               key={it.id}

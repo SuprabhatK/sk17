@@ -763,14 +763,9 @@ export default function Portfolio() {
       </div>
 
       <div className="dial-anchor">
-        <div className="orbit" />
-        <div className="lens" />
         <div className="dial-preview" ref={previewRef}>
           <div className="dial" ref={dialRef}>
             <div className="ring" />
-            <div className="ticks" />
-            <div className="ticks major" />
-            <div className="ring3" />
             {sections.map((s, i) => (
               <button
                 key={s.id}

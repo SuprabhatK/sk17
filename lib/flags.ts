@@ -5,4 +5,4 @@
  * pricing block and estimator on the projects page, and every link or label that mentions it.
  * Set it to true to show pricing again, then commit and push.
  */
-export const SHOW_PRICING = false;
+export const SHOW_PRICING = true;
