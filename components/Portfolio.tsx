@@ -6,7 +6,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { Observer } from "gsap/Observer";
 import { sections, EMAIL, PHONE, PHONE_TEL, whatsappLink, LINKEDIN, LINKEDIN_LABEL, type Section } from "@/lib/content";
-import { HOURLY_RATE, inr, plans } from "@/lib/pricing";
+import { hasRate, rateLabel, costOf, daysFor, plans } from "@/lib/pricing";
 import { SHOW_PRICING } from "@/lib/flags";
 import { Bolt } from "./Bolt";
 import ThemeBolt from "./ThemeBolt";
@@ -486,9 +486,19 @@ function Visual({ s }: { s: Section }) {
     return (
       <div className="vis vis-pricing">
         <div className="rate">
-          <span>Hourly rate</span>
-          <b>{inr(HOURLY_RATE)}</b>
-          <small>per hour, fixed-price quotes available, prices negotiable</small>
+          {hasRate ? (
+            <>
+              <span>Hourly rate</span>
+              <b>{rateLabel()}</b>
+              <small>per hour, fixed-price quotes available, prices negotiable</small>
+            </>
+          ) : (
+            <>
+              <span>My promise</span>
+              <b>No surprises</b>
+              <small>Scope and estimate in writing before I start. Fixed price or hourly, and prices are negotiable.</small>
+            </>
+          )}
         </div>
         <div className="plans">
           {plans.map((p) => (
@@ -498,14 +508,14 @@ function Visual({ s }: { s: Section }) {
                 <p>{p.blurb}</p>
               </div>
               <div className="plan-p">
-                <small>from</small>
-                <b>{inr(p.hours * HOURLY_RATE)}</b>
-                <em>about {p.hours} hrs</em>
+                <small>{hasRate ? "from" : "typical effort"}</small>
+                <b>{hasRate ? costOf(p.hours) : `~${p.hours} hrs`}</b>
+                <em>{hasRate ? `about ${p.hours} hrs` : `about ${daysFor(p.hours)} working days`}</em>
               </div>
             </Link>
           ))}
         </div>
-        <p className="plans-note">Starting points only, and the price is negotiable. Add functionality, complexity and what you can provide in the estimator for your exact range.</p>
+        <p className="plans-note">Starting points only, and the price is negotiable. Open the estimator to add functionality, complexity and what you can provide for your own scope.</p>
       </div>
     );
   if (s.media === "skills") return <Skills s={s} />;

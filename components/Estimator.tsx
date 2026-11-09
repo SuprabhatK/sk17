@@ -3,12 +3,12 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  HOURLY_RATE,
   PRODUCTIVE_HOURS_PER_DAY,
   ESTIMATE_LOW,
   ESTIMATE_HIGH,
-  inr,
-  roundTo,
+  hasRate,
+  rateLabel,
+  costRange,
   projectTypes,
   features,
   complexities,
@@ -120,30 +120,38 @@ export default function Estimator() {
       <aside className="est-result">
         <p className="est-eyebrow">Your estimate</p>
         <div className="est-price">
-          {billing === "fixed" ? (
-            <>
-              {inr(roundTo(calc.lo * HOURLY_RATE, 500))} <i>to</i> {inr(roundTo(calc.hi * HOURLY_RATE, 500))}
-            </>
+          {hasRate ? (
+            billing === "fixed" ? (
+              <>{costRange(calc.lo, calc.hi)}</>
+            ) : (
+              <>
+                {rateLabel()} <i>per hour</i>
+              </>
+            )
           ) : (
             <>
-              {inr(HOURLY_RATE)} <i>per hour</i>
+              {Math.round(calc.lo)} to {Math.round(calc.hi)} <i>hours</i>
             </>
           )}
         </div>
         <p className="est-sub">
-          {billing === "fixed"
-            ? "Fixed price, agreed in writing before I start."
-            : `About ${Math.round(calc.lo)} to ${Math.round(calc.hi)} hours, billed weekly from a timesheet.`}
+          {hasRate
+            ? billing === "fixed"
+              ? "Fixed price, agreed in writing before I start."
+              : `About ${Math.round(calc.lo)} to ${Math.round(calc.hi)} hours, billed weekly from a timesheet.`
+            : "Typical effort for this scope. Pricing is shared after a short call, and it is negotiable."}
         </p>
 
-        <div className="est-toggle" role="tablist">
-          <button className={billing === "fixed" ? "on" : ""} onClick={() => setBilling("fixed")}>
-            Fixed price
-          </button>
-          <button className={billing === "hourly" ? "on" : ""} onClick={() => setBilling("hourly")}>
-            Hourly
-          </button>
-        </div>
+        {hasRate && (
+          <div className="est-toggle" role="tablist">
+            <button className={billing === "fixed" ? "on" : ""} onClick={() => setBilling("fixed")}>
+              Fixed price
+            </button>
+            <button className={billing === "hourly" ? "on" : ""} onClick={() => setBilling("hourly")}>
+              Hourly
+            </button>
+          </div>
+        )}
 
         <ul className="est-lines">
           <li>
@@ -176,7 +184,8 @@ export default function Estimator() {
           Get an exact quote <i>→</i>
         </Link>
         <p className="est-fine">
-          This is an estimate to help you plan, and the price is negotiable. After a short call I confirm scope and send a final quote. The rate is {inr(HOURLY_RATE)}/hour and the range allows for {Math.round((1 - ESTIMATE_LOW) * 100)}% under to {Math.round((ESTIMATE_HIGH - 1) * 100)}% over.
+          This is an estimate to help you plan, and the price is negotiable. After a short call I confirm the scope and send a final quote.
+          {hasRate && <> The rate is {rateLabel()}/hour.</>} The range allows for {Math.round((1 - ESTIMATE_LOW) * 100)}% under to {Math.round((ESTIMATE_HIGH - 1) * 100)}% over.
         </p>
       </aside>
     </div>

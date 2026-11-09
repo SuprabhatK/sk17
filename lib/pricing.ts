@@ -1,15 +1,26 @@
 /**
- * PRICING CONFIG, EDIT ME.
- * Every number the website shows about price comes from this file.
- * The values below are PLACEHOLDERS to be confirmed by Suprabhat before going live.
+ * PRICING CONFIG
+ *
+ * Amounts in rupees are HIDDEN while HOURLY_RATE is null: the site then shows effort (hours) and delivery
+ * time only, and says that the price is negotiable and shared after a short call.
+ * To show amounts, set HOURLY_RATE to your real rate (INR per hour), for example 1200, and push.
+ * The hours below are estimates based on real projects. Adjust them if they do not match your experience.
  */
-export const HOURLY_RATE = 1500; // INR per hour (placeholder, confirm)
-export const PRODUCTIVE_HOURS_PER_DAY = 6; // used only to turn hours into a delivery timeline
+export const HOURLY_RATE: number | null = null;
+export const PRODUCTIVE_HOURS_PER_DAY = 6; // used to turn hours into a delivery timeline
 export const ESTIMATE_LOW = 0.9; // low end of the range = estimate x 0.9
 export const ESTIMATE_HIGH = 1.15; // high end of the range = estimate x 1.15
 
 export const inr = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
 export const roundTo = (n: number, step: number) => Math.round(n / step) * step;
+
+/** true only when a rate has been set; every amount on the site goes through these helpers */
+export const hasRate = HOURLY_RATE !== null;
+export const rateLabel = (): string | null => (HOURLY_RATE === null ? null : inr(HOURLY_RATE));
+export const costOf = (hours: number): string | null => (HOURLY_RATE === null ? null : inr(hours * HOURLY_RATE));
+export const costRange = (lo: number, hi: number): string | null =>
+  HOURLY_RATE === null ? null : inr(roundTo(lo * HOURLY_RATE, 500)) + " to " + inr(roundTo(hi * HOURLY_RATE, 500));
+export const daysFor = (hours: number) => Math.ceil(hours / PRODUCTIVE_HOURS_PER_DAY);
 
 export type ProjectType = { id: string; name: string; hours: number; note: string; ref: string };
 export const projectTypes: ProjectType[] = [
