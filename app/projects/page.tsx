@@ -199,7 +199,7 @@ export default async function ProjectsPage() {
 
         <section className="pg-cta glass">
           <h2>Have a project in mind?</h2>
-          <p>{SHOW_PRICING ? "Send a few details and I will reply with a scope and a fixed quote." : "Send a few details and I will reply with next steps."}</p>
+          <p>Let&apos;s bring it to life and give it its own small space on the internet. Share a few details and I&apos;ll reply with next steps.</p>
           <div className="cta">
             <Link className="btn" href="/?s=contact">
               Contact me <i>→</i>

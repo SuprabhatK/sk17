@@ -8,6 +8,8 @@ import "./mobile.css";
 import "./carousel.css";
 import "./about.css";
 import "./social.css";
+import "./bubble.css";
+import BubbleHover from "@/components/BubbleHover";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -28,7 +30,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <BubbleHover />
+      </body>
     </html>
   );
 }

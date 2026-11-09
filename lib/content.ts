@@ -55,8 +55,8 @@ const allSections: Section[] = [
     nav: "Home",
     eyebrow: "Suprabhat Karmakar · Senior Frontend Developer",
     title: "Websites & web apps that grow your business",
-    desc: "Senior Frontend & Full-Stack Developer with 5+ years of experience. I work as a consultant and builder: I find the gap in your business, then design and build the website around it, connect the database and host it, taking you from the first idea to a live product.",
-    points: ["Consulting: I find the gap in your business, then design for it", "End to end: build, database connection and hosting", "AEM EDS (Adobe Edge Delivery Services) specialist"],
+    desc: "Every great website starts with a simple conversation. Bring me a clear idea and I'll bring it to life, or bring me just a goal and I'll help you shape the right plan. With 5+ years as a Senior Frontend and Full-Stack Developer and consultant, I take care of everything from design and development to the database and hosting, until your website is live and working for your business.",
+    points: ["Have an idea? I design and build it, end to end", "Want guidance? I help you shape the right website for your business", "AEM EDS (Adobe Edge Delivery Services) specialist"],
     media: "photo",
     hue: 0,
   },
@@ -70,7 +70,7 @@ const allSections: Section[] = [
       "Based in Mumbai, India",
       "Enterprise work for insurance and finance brands",
       "Focused on reusable architecture, responsive design and performance",
-      "Also a consultant: I find the gap in your business and design for it",
+      "Developer and consultant: I build your idea, or help you shape it first",
     ],
     media: "about",
     aboutTabs: [
@@ -147,26 +147,34 @@ const allSections: Section[] = [
   {
     id: "consulting",
     nav: "Consulting",
-    eyebrow: "Business consulting",
-    title: "Find the gap, then design for it",
-    desc: "A website works best when it solves a real business problem. Before designing anything, I look at how your business runs, who your customers are and where opportunities are being lost. Then I design and build the site around those gaps, and share ideas to help your business grow.",
+    eyebrow: "Developer and consultant",
+    title: "Bring your idea, or let's shape it together",
+    desc: "Some clients arrive with a clear idea, and others simply know they want their business to grow. Both are a good place to start. If you already know what you need, I will build it. If you would like guidance first, we look at how your business works, who your customers are and what could help most, and I design the website around that.",
     points: [
-      "I start with your customers, your offer and your goals",
-      "I spot the gaps: unclear message, weak trust, slow pages, no follow-up",
-      "The website is designed around those gaps, with growth ideas you can act on",
+      "Have a clear idea? I design and build it",
+      "Want advice first? We look at your goals and customers together",
+      "Either way, you get practical growth ideas you can act on",
     ],
-    cta: { label: "Talk about your business", goto: "contact" },
+    cta: { label: "Share your idea or goal", goto: "contact" },
     media: "about",
     aboutTabs: [
       {
-        name: "Find the gap",
+        name: "Ways to start",
         items: [
-          { title: "Is your offer clear?", text: "Within a few seconds a visitor should know what you do, who it is for and why they should choose you." },
-          { title: "Is the next step obvious?", text: "Call, WhatsApp, enquiry or buy: every page should lead somewhere, without making people search." },
-          { title: "Does the site build trust?", text: "Case studies, reviews and proof of results reduce doubt, especially for services and higher-value purchases." },
-          { title: "Is it fast on a phone?", text: "Most visitors arrive on mobile. Slow or cramped pages quietly lose customers." },
-          { title: "Do you know what visitors do?", text: "Without analytics you are guessing. Tracking shows where people come from and where they leave." },
-          { title: "Can your team keep it fresh?", text: "If every change needs a developer, the site goes stale. Easy updating keeps it useful." },
+          { title: "I have an idea", text: "Tell me what you want to build. I confirm the scope, then design and build it end to end, including the database and hosting." },
+          { title: "I have a goal", text: "Tell me what you want to achieve, such as more enquiries or more sales, and we work out together what the website should do." },
+          { title: "I have an existing site", text: "I can review it with you, suggest improvements, or migrate it, for example to AEM EDS." },
+        ],
+      },
+      {
+        name: "Where to focus",
+        items: [
+          { title: "A clear offer", text: "Visitors should understand within seconds what you do, who it is for and why they should choose you." },
+          { title: "An obvious next step", text: "Call, WhatsApp, enquire or buy: every page can guide visitors to what to do next." },
+          { title: "Proof that builds trust", text: "Case studies, reviews and results help new visitors feel confident about choosing you." },
+          { title: "A fast mobile experience", text: "Most visitors arrive on a phone, so speed and clear layouts make a real difference." },
+          { title: "Insight into what visitors do", text: "Analytics shows where visitors come from and what they do, so decisions are based on facts." },
+          { title: "Easy updating for your team", text: "When your team can update the site themselves, it stays fresh without waiting for a developer." },
         ],
       },
       {
@@ -197,12 +205,12 @@ const allSections: Section[] = [
     nav: "Services",
     eyebrow: "What I do for your business",
     title: "Design to launch, end to end",
-    desc: "One experienced developer and consultant for the whole journey. You share the idea; I handle design, development, the database connection, hosting and support, so there are no hand-offs and nothing gets lost in translation.",
+    desc: "One experienced developer and consultant for the whole journey. Bring your idea, or let's shape it together. I handle design, development, the database connection, hosting and support, so there are no hand-offs and nothing gets lost in translation.",
     points: ["Clear scope, a clear plan and regular updates", "Mobile-first, fast and search-friendly by default", "Database connected and the site hosted for you, end to end"],
     cta: { label: "Start a project", goto: "contact" },
     media: "services",
     services: [
-      { title: "Business consulting", text: "I look at your business, find the gaps and plan a website that helps it grow.", get: "Gap check · growth ideas · clear next steps" },
+      { title: "Business consulting", text: "Not sure where to start? We look at your goals and customers together and plan a website that helps your business grow.", get: "Your goals · growth ideas · clear next steps" },
       { title: "Design & frontend development", text: "Modern, brand-aligned and accessible interfaces built with React and Next.js.", get: "UI concept · responsive layouts · reusable components" },
       { title: "Full-stack development", text: "APIs, databases, authentication and admin panels that work together.", get: "REST/GraphQL · databases · secure admin" },
       { title: "E-commerce, end to end", text: "Storefront, catalogue, orders and a back-office you can run yourself.", get: "Product & order management · integrations" },
@@ -458,13 +466,13 @@ const allSections: Section[] = [
       },
       {
         "cat": "Business",
-        "title": "Start with the gap, not the design",
+        "title": "Start with your goals, not the design",
         "read": "2 min read",
-        "summary": "A good website starts by finding what is missing in the business, not by choosing colours.",
+        "summary": "A good website starts from what the business wants to achieve, not from choosing colours.",
         "bullets": [
-          "I begin with your customers, your offer and your goals.",
-          "Then I look for gaps: an unclear message, weak proof, slow pages or no follow-up.",
-          "The design and the build are planned around closing those gaps."
+          "Whether you arrive with an idea or just a goal, I start by understanding your customers and what you want to achieve.",
+          "Then we decide together what the website needs to do for your business.",
+          "The design and the build follow from that, so every page has a purpose."
         ]
       },
       {
@@ -504,8 +512,8 @@ const allSections: Section[] = [
     id: "contact",
     nav: "Contact",
     eyebrow: "Let's work together",
-    title: "Tell me about your project",
-    desc: "Need a new website, an online store or an AEM EDS specialist? Send a few details and I'll reply with next steps, or call me directly.",
+    title: "Tell me about your idea or goal",
+    desc: "Have an idea, a goal, or an existing site you would like to improve? Share a few details and I will reply with next steps, or call me directly.",
     media: "form",
     hue: -45,
   },

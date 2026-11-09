@@ -8,11 +8,11 @@ const promises = [
   { t: "Changes handled openly", d: "If requirements change, I explain the effect on time and cost first, and go ahead only when you agree." },
   { t: "Fast and performance-minded", d: "Pages are checked with Lighthouse and for accessibility before launch. Two brochure sites went live in about 7 hours each." },
   { t: "A clean handover", d: "A tested site with the database connected and hosting set up, plus a go-live checklist, with code organised so your team or another developer can carry on." },
-  { t: "Business-first advice", d: "I look for the real gap in your business first. If a simpler option fits your goal better, I will tell you, even if it means a smaller project." },
+  { t: "Business-first advice", d: "Whether you come with an idea or a goal, I focus on what helps your business most, and I will always suggest the option that fits best." },
 ];
 
 const steps = [
-  { t: "Discovery call", d: "We talk through your goals, your customers and where the business is losing opportunities, so the website is designed around real gaps." },
+  { t: "Discovery call", d: "We talk through your idea or goals, your customers and any existing systems, so I understand what success looks like for you." },
   { t: "Scope in writing", d: "I confirm what will be built, what you provide and what I do, and send a written estimate for your approval." },
   { t: "Build with previews", d: "I build in stages and share preview links, with regular check-ins for feedback and bug discussions." },
   { t: "Database, hosting and launch", d: "I connect the database, host the site, and test across devices with performance, accessibility and go-live checks before it goes live." },
@@ -37,7 +37,11 @@ const faq: FaqItem[] = [
   },
   {
     q: "Can you advise on how my website can help my business grow?",
-    a: "Yes. I work as a consultant as well as a developer: I look at how your business runs, where customers get stuck or drop off, and what is missing, then plan the website and next steps around that. I share ideas based on experience, and we decide together what is worth doing.",
+    a: "Yes. I work as a developer and a consultant. You can come with a clear idea and I will build it, or come with a goal and we will work out together what the website should do. I look at how your business works and what your customers need, then share practical ideas, and we decide together what is worth doing.",
+  },
+  {
+    q: "I already know what I want. Can you just build it?",
+    a: "Absolutely. Share your requirements and designs, or let me design it, and I will build it end to end, including the database and hosting.",
   },
   {
     q: "Do you handle the database and hosting too?",
