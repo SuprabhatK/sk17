@@ -5,7 +5,7 @@
 .pager button:disabled { opacity: .3; }
 
 @media (max-width: 860px) {
-  :root { --R: 130vw; --gutter: calc(100vw - 46px); }
+  :root { --R: 130vw; --gutter: 52vw; }
   .stage { touch-action: pan-y; }
 
   /* header and bottom bar are solid strips, so nothing collides with scrolling content */
@@ -18,15 +18,16 @@
 
   /* the dial becomes a thin decorative arc on the right edge, clear of the text */
   .dial-anchor { left: var(--gutter); top: 50%; }
-  .marker span { right: 15px; font-size: 13px; }
-  .marker.on span { font-size: 16px; }
+  .marker span { right: 11px; font-size: 11px; }
+  .marker.on span { font-size: 14px; }
+  .dial-anchor { opacity: .4; } /* the dial sits behind the content, in the middle like on desktop */
   .ring3, .ticks.major, .orbit { display: none; }
   .blob-wrap { right: -30vw; top: 64%; left: auto; width: 64vw; height: 64vw; opacity: .5; }
   .orb.a, .orb.b { opacity: .6; }
 
   /* each section is its own scroll area between the header and the bottom bar */
   .content { left: 0; right: 0; top: 56px; bottom: 58px; }
-  .panel { display: block; padding: 8px 58px 28px 20px; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .panel { display: block; padding: 8px 20px 28px 20px; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .panel::-webkit-scrollbar { display: none; }
   .col-l { max-width: none; }
   .col-r { margin-top: 22px; }

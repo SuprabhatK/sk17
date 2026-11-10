@@ -9,7 +9,11 @@ import "./carousel.css";
 import "./about.css";
 import "./social.css";
 import "./bubble.css";
+import Script from "next/script";
 import BubbleHover from "@/components/BubbleHover";
+
+/** Google tag ID (public, not a secret). Shown in Google Analytics > Data streams > Configure tag settings. */
+const GOOGLE_TAG_ID = "GTM-MCF43G6V";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -33,6 +37,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <BubbleHover />
+        <Script src={`https://www.googletagmanager.com/gtm.js?id=${GOOGLE_TAG_ID}`} strategy="afterInteractive" />
+        <Script id="google-tag" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());`}</Script>
       </body>
     </html>
   );
