@@ -279,7 +279,7 @@ const allSections: Section[] = [
       { n: "5+", label: "years experience" },
       { n: "2+", label: "years AEM EDS" },
       { n: "4", label: "developers led" },
-      { n: "6", label: "live projects shown" },
+      { n: "6+", label: "projects delivered" },
     ],
     tabs: [
       {

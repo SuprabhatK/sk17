@@ -21,7 +21,7 @@ const steps = [
 
 const trust = [
   { n: "5+", l: "years of experience" },
-  { n: "6", l: "live projects" },
+  { n: "6+", l: "projects delivered" },
   { n: "3 yrs", l: "on one enterprise engagement" },
   { n: "100+", l: "API calls integrated" },
 ];

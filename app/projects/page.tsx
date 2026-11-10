@@ -58,12 +58,12 @@ export default async function ProjectsPage() {
           <p className="eyebrow">Project case studies</p>
           <h1 className="title">{SHOW_PRICING ? "What I built, how it was run, and how I work with you" : "What I built and how it was run"}</h1>
           <p className="lead">
-            Six real projects, from a 3-year enterprise engagement to sites that went live in 7 hours. Below you will find what each one involved, how we worked with the client, who did what{SHOW_PRICING ? ", and a transparent way to estimate your own project" : ""}.
+            Six of the 6+ projects I have delivered, from a 3-year enterprise engagement to sites that went live in 7 hours. Below you will find what each one involved, how we worked with the client, who did what{SHOW_PRICING ? ", and a transparent way to estimate your own project" : ""}.
           </p>
           <div className="pg-stats">
             <div>
-              <b>6</b>
-              <span>live projects</span>
+              <b>6+</b>
+              <span>projects delivered</span>
             </div>
             <div>
               <b>3 yrs</b>
